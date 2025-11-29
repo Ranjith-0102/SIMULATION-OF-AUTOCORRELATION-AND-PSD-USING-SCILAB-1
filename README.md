@@ -1,93 +1,92 @@
-# SIMULATION-OF-MEAN-AND-VARIANCE-USING-SCILAB-
+# SIMULATION-OF-AUTOCORRELATION-AND-PSD-USING-SCILAB-1
+
 __AIM:__
 
-To write a program for mean, variance and cross correlation in SCILAB and verify the output. 
+Write a program for Autocorrelation and PSD of signals in SCILAB and verify Wiener-Khinchin relation. 
 
-__EQUIPMENTS NEEDED:__
+
+__EQUIPMENTS Needed:__
 
 .Computer with i3 Processor 
 
-.SCI LAB 
+.SCI LAB
 
-__ALGORITHM:__
 
-1. Define the Function: Specify the function you want to simulate. For example, 
-f(x)=sin⁡(x)f(x)=sin(x) or any other function. 
-2. Generate Sample Points: Decide on the range and the number of sample points. Generate 
-these sample points within the desired range. 
-3. Evaluate the Function: Compute the function values at each of these sample points. 
-4. Compute Mean, Variance and Cross Correlation: Use Scilab's functions to calculate the 
-mean and variance of the computed function values. 
-5. Display Results: Output the computed mean variance and Cross Correlation 
+__THEORY:__
 
-__PROCEDURE:__ 
+The Wiener-Khinchin theorem states that the power spectral density of a wide sense stationary random process is the 
+Fourier transform of the corresponding autocorrelation function.
 
-1.Refer Algorithms and write code for the experiment. 
+__Algorithm:__
 
-2.Open SCILAB in System 
+ 1.Load or Define the Signal: Input your time-domain signal. 
 
-3.Type your code in New Editor 
+ 2.Compute Autocorrelation: Calculate the autocorrelation function of the signal.
 
-4.Save the file 
+3.Compute Power Spectral Density (PSD): Estimate the PSD of the signal, either directly using a method like
+Welch’s periodogram or by using the Fourier transform of the autocorrelation.
 
-5.Execute the code If any Error, correct it in code and execute again 
-  
-6.Verify the generated results
+4.Plot Results: Visualize the autocorrelation function and PSD. 
+
+__PROCEDURE:__
+
+
+Refer Algorithms and write code for the experiment. 
+
+Open SCILAB in System 
+
+Type your code in New Editor 
+
+Save the file 
+
+Execute the code 
+
+If any Error, correct it in code and execute again 
+
+Verify the generated waveform using Tabulation and Model Waveform 
 
 __PROGRAM:__
 ```
-clear;
- clc; 
-clear; 
-//Mean Value 
-function X=f(x), 
-z=3*(1-x)^2,
-//Marginal Probability Density Function 
-X=x*z; 
-endfunction 
-a=1.5; 
-b=2; 
-EX=intg(a,b,f); //Mean value of X
-function Y=c(y), 
-z=3*(1-y)^2, //Marginal Probability Density Function 
-Y=y*z;
-endfunction
- EY=intg(a,b,c);//Mean value of Y
- disp(EX,"i)Mean of X =") 
-disp(EY," Mean of Y =")
-//Variance 
-function X=g(x),
- z=3*(1-x)^2,
-//Marginal Probability Density Function
- X=x^2*z; 
-endfunction 
-a=1.5; 
-b=2; 
-EX2=intg(a,b,g); 
-function Y=h(y), z=3*(1-y)^2,
-//Marginal Probability Density Function
- Y=y^2*z;
-endfunction 
-EY2=intg(a,b,h); 
-vX2=EX2-(EX)^2; //Variance of X 
-vY2=EY2-(EY)^2;//Variance of Y 
-disp(vX2,"ii)Variance of X"); 
-disp(vY2," Variance of Y");
-//Cross Correlation
- x= input("type in the reference sequence=");
- y= input("type in the second sequence=");
-n1=max(size(y))-1;
-n2=max(size(x))-1;
-r=corr(x,y,n1); 
-plot2d3('gnn',r);
+clc;
+clear all;
+close;
+
+t = 0:0.01:%pi*2;
+x = sin(2*t);
+
+// Plot original signal
+subplot(3,2,1);
+plot(t, x);
+title('Original Signal');
+
+// Autocorrelation
+au = xcorr(x, x);
+subplot(3,2,2);
+plot(au);
+title('Autocorrelation');
+
+// FFT of autocorrelation
+v = fft(au);
+subplot(3,2,3);
+plot(abs(v));
+title('FFT of Autocorrelation');
+
+// FFT of original signal
+fw = fft(x);
+subplot(3,2,4);
+plot(abs(fw));
+title('FFT of Original Signal');
+
+// Power spectrum
+fw2 = (abs(fw)).^2;
+subplot(3,2,5);
+plot(fw2);
+title('Power Spectrum');
 ```
-__OUTPUT GRAPH:__
-<img width="1920" height="1200" alt="Screenshot 2025-11-10 213636" src="https://github.com/user-attachments/assets/5f1aacc6-12be-4ce7-87f2-b5431ba89d4d" />
-<img width="1920" height="1200" alt="ac5" src="https://github.com/user-attachments/assets/44b7142a-86e3-4acd-8ce8-7c4f1324ed96" />
 
-
-
+__OUTPUT:__
+<img width="1920" height="1200" alt="ac6" src="https://github.com/user-attachments/assets/8687b6f7-4aeb-42fa-b2a9-edf5820dac62" />
 
 __RESULT:__
 
-Thus the mean and variance using scilab code with the given reference sequence is verified and proved successfully.
+Thus, the Autocorrelation and PSD are executed in Scilab and output is verified.
