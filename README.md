@@ -88,5 +88,6 @@ __OUTPUT:__
 <img width="1920" height="1200" alt="ac6" src="https://github.com/user-attachments/assets/8687b6f7-4aeb-42fa-b2a9-edf5820dac62" />
 
 __RESULT:__
+<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/f794228c-f7e2-4c71-b43a-623167007bcf" />
 
 Thus, the Autocorrelation and PSD are executed in Scilab and output is verified.
